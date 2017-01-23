@@ -10,7 +10,8 @@
 <ion-content padding>
 	<h2>Workouts</h2>
 	<ion-list>
-		<ion-item>
+		<ion-item *ngFor="let workout of workouts">
+			{{workout.title}}
 		</ion-item>
 	</ion-list>
 
