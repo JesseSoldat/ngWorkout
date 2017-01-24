@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WorkoutService } from '../../app/services/workout.service';
 
-
+import { WorkoutsPage } from '../workouts/workouts';
 
 @Component({
   selector: 'page-add-workout',
@@ -32,7 +32,10 @@ export class AddWorkoutPage {
 
   	this.workoutService.addWorkout(workout).subscribe(data => {
   		this.result = data;
-  	})
+  	}, err => console.log(err),
+  	() => console.log("Workout Added"));
+
+  	this.navCtrl.setRoot(WorkoutsPage);
   }
 
 }

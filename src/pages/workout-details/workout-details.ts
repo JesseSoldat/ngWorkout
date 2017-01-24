@@ -1,22 +1,37 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { WorkoutService } from '../../app/services/workout.service';
+import { WorkoutsPage } from '../workouts/workouts';
 
-/*
-  Generated class for the WorkoutDetails page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-workout-details',
   templateUrl: 'workout-details.html'
+  // providers: [ WorkoutService ]
 })
 export class WorkoutDetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+	workout;
+	result;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public workoutService: WorkoutService) {
+  	this.workout = this.navParams.get('workout');
+
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WorkoutDetailsPage');
+    // console.log('ionViewDidLoad WorkoutDetailsPage');
+  }
+
+  deleteWorkout(workout){
+  	console.log(workout);
+  	
+  	this.workoutService.deleteWorkout(workout).subscribe(res => {
+  		this.result = res;
+  	}, err => console.log(err),
+  	() => console.log("Workout Deleted")
+  	);
+  	this.navCtrl.setRoot(WorkoutsPage);
   }
 
 }
